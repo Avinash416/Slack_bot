@@ -47,7 +47,7 @@ app.error((error) => {
 
 (async () => {
     // Start the bot
-    const port = 3000
+    const port = process.env.PORT || 3000;
     await app.start(port);
     console.log('Slack bot is running!');
 })();
