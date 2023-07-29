@@ -25,13 +25,12 @@ app.command('/greet', commandHandlers.greet);
 app.command('/quote', commandHandlers.quote);
 
 //add a message
-app.event('app_mention', async ({ event, say }) => {
+app.message('hey', async ({ message, say }) => {
+    console.log("Received 'hey' message from:", message.user);
     try {
-      console.log(event);
       await say('hello!');
     } catch (error) {
-      console.log('err');
-      console.error(error);
+      console.error('Error sending response:', error);
     }
   });
 
