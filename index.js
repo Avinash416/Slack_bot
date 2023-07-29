@@ -2,7 +2,6 @@ const { App, LogLevel } = require('@slack/bolt');
 const axios = require('axios');
 const dotenv = require("dotenv")
 const commandHandlers =require("./commandHandlers.js")
-const sendKeepAlivePing =require('./CheckConnection.js')
 
 dotenv.config()
 
@@ -14,12 +13,6 @@ const app = new App({
     // logLevel: LogLevel.DEBUG // Set to LogLevel.INFO in production for fewer logs
 });
 
-
-
-
-
-// Schedule the keep-alive ping every 30 minutes (30 * 60 * 1000 ms)
-setInterval(sendKeepAlivePing, 30 * 60 * 1000);
 
 // Handle incoming commands
 app.command('/hello', commandHandlers.hello);
