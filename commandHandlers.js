@@ -14,6 +14,8 @@ const commandHandlers = {
             `• /time - Get the current date and time\n` +
             `• /weather - Get the weather of given city\n` +
             `• /joke - Gives a random joke\n` +
+            `• /greet - Greeting with the given name\n` +
+            `• /quote - Gives a random quote\n` +
             `• /help - Show this help message`;
         await say(helpMessage);
     },

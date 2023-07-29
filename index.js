@@ -3,13 +3,14 @@ const axios = require('axios');
 const dotenv = require("dotenv")
 const commandHandlers =require("./commandHandlers.js")
 
+
 dotenv.config()
 
 const app = new App({
     token: process.env.SLACK_BOT_TOKEN,
     signingSecret: process.env.SLACK_SIGNIN_SECRET,
-    socketMode: true, // enable the following to use socket mode
-    appToken: process.env.SOCKET_TOKEN,
+    // socketMode: true, // enable the following to use socket mode
+    // appToken: process.env.SOCKET_TOKEN,
     // logLevel: LogLevel.DEBUG // Set to LogLevel.INFO in production for fewer logs
 });
 
@@ -24,14 +25,15 @@ app.command('/greet', commandHandlers.greet);
 app.command('/quote', commandHandlers.quote);
 
 //add a message
-app.message("hey", async ({ message, say }) => {
+app.event('app_mention', async ({ event, say }) => {
     try {
-        await say("hello!");
+      console.log(event);
+      await say('hello!');
     } catch (error) {
-        console.log("err")
-        console.error(error);
+      console.log('err');
+      console.error(error);
     }
-});
+  });
 
 // Handle errors
 app.error((error) => {
@@ -41,6 +43,7 @@ app.error((error) => {
 (async () => {
     // Start the bot
     const port = process.env.PORT || 3000;
-    await app.start(port);
+   await app.start(port);
+   
     console.log('Slack bot is running!');
 })();
