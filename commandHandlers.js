@@ -44,12 +44,39 @@ const commandHandlers = {
             const temperature = weatherData.main.temp;
             const description = weatherData.weather[0].description;
 
-            // Send the weather information as the bot's response
-            await say(`Weather in ${location}: ${description}, Temperature: ${temperature}°C`);
-        } catch (error) {
-            console.error('Error fetching weather:', error);
-            await say('Sorry, something went wrong while fetching weather information.');
-        }
+             // Create interactive buttons for unit selection
+      const buttons = [
+        {
+          text: 'Celsius',
+          type: 'button',
+          value: 'celsius',
+        },
+        {
+          text: 'Fahrenheit',
+          type: 'button',
+          value: 'fahrenheit',
+        },
+      ];
+
+      // Send the weather information as the bot's response with the interactive buttons
+      await say({
+        text: `Weather in ${location}: ${description}, Temperature: ${temperature}°C`,
+        attachments: [
+          {
+            text: 'Select the unit:',
+            fallback: 'You are unable to choose a unit',
+            callback_id: 'weather_unit_selection',
+            color: '#3AA3E3',
+            attachment_type: "default",
+            actions: buttons,
+          },
+        ],
+      });
+    } catch (error) {
+      console.error('Error fetching weather:', error);
+      await say('Sorry, something went wrong while fetching weather information.');
+    }
+  
     },
 
     joke: async ({ command, ack, say }) => {

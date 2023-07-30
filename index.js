@@ -14,6 +14,23 @@ const app = new App({
     // logLevel: LogLevel.DEBUG // Set to LogLevel.INFO in production for fewer logs
 });
 
+//
+app.action('weather_unit_selection', async ({ body, ack, say }) => {
+  // Acknowledge the action
+  await ack();
+
+  // Extract the selected value from the action payload
+  const selectedValue = body.actions[0].value;
+
+  // Respond based on the selected value
+  if (selectedValue === 'celsius') {
+    await say('You selected Celsius.');
+  } else if (selectedValue === 'fahrenheit') {
+    await say('You selected Fahrenheit.');
+  } else {
+    await say('Invalid selection.');
+  }
+});
 
 // Handle incoming commands
 app.command('/hello', commandHandlers.hello);
