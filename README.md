@@ -77,6 +77,20 @@ Configuration:
      - /weather
      - /quote
      - Type "hey" to trigger the message-based response.
+     - 
+Deployment:
+
+- You can deploy the bot to a hosting service or cloud platform of your choice (e.g., Heroku, AWS, etc.).
+- Make sure to set the environment variables in your hosting environment for the bot to work correctly.
+
+Using ngrok for Local Development and Testing:
+
+- Ngrok allows you to create a secure tunnel to your local development environment, making it accessible from the internet.
+- Download and install Ngrok on your machine.
+- After starting your bot locally using npm start or yarn start, open a new terminal window and run the following command to create a tunnel:
+ngrok http 3000
+- Ngrok will provide a public URL (e.g., https://abcdefg.ngrok.io). Use this URL as the request URL when configuring your Slack app's "Interactivity & Shortcuts" settings.
+- Now, your locally running bot will be accessible via the Ngrok URL, and you can test your bot in your Slack workspace.
 
 Troubleshooting:
 If you encounter any issues or errors while setting up or using the bot, refer to the Troubleshooting Guide for common solutions.
